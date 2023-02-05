@@ -1,6 +1,6 @@
 # Amaneru NeoVim Config
 
-** ensure install one of nerdfont **
+**ensure install one of nerd font**
 
 ````shell
 yay -S ripgreg neovim
