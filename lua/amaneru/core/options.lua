@@ -29,3 +29,10 @@ opt.splitright = true -- split vertical window to the right
 opt.splitbelow = true -- split horizontal window to the bottom
 
 opt.iskeyword:append("-") -- consider string-string as whole word
+
+-- vim.cmd([[
+--   augroup vimrc
+--     au BufReadPre * setlocal foldmethod=indent
+--     au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+--   augroup END
+-- ]])

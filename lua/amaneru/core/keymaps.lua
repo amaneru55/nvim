@@ -18,9 +18,6 @@ keymap.set("n", "<leader>tp", "<cmd>tabp<cr>") --  go to previous tab
 -- clear search highlights
 keymap.set("n", "<leader>nh", "<cmd>nohl<cr>")
 
--- vim-maximizer
-keymap.set("n", "<leader>sm", "<cmd>MaximizerToggle<cr>") -- toggle split window maximization
-
 -- nvim-tree
 keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>") -- toggle file explorer
 keymap.set("n", "<leader>cb", "<cmd>NvimTreeFindFile<cr>") -- toggle file explorer
@@ -29,7 +26,7 @@ keymap.set("n", "<leader>cb", "<cmd>NvimTreeFindFile<cr>") -- toggle file explor
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
 keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
-keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
+keymap.set('n', '<leader>fb', '<cmd>lua require("telescope").extensions.file_browser.file_browser({path="%:p:h", cwd=telescope_buffer_dir(), respect_git_ignore=false})<CR>')
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
 keymap.set("n", "<leader>lds", "<cmd>Telescope lsp_document_symbols<cr>") -- list all functions/structs/classes/modules in the current buffer
 
@@ -46,3 +43,9 @@ vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
 vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+
+-- vim-maximizer
+keymap.set("n", "<leader>sm", "<cmd>MaximizerToggle<cr>") -- toggle split window maximization
+
+-- restart lsp server
+keymap.set("n", "<leader>rs", "<cmd>LspRestart<cr>")
