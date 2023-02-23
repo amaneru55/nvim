@@ -49,3 +49,6 @@ keymap.set("n", "<leader>sm", "<cmd>MaximizerToggle<cr>") -- toggle split window
 
 -- restart lsp server
 keymap.set("n", "<leader>rs", "<cmd>LspRestart<cr>")
+
+-- unbind the fucking man
+keymap.set("", "<S-k>", "<Nop>")
