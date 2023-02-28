@@ -1,11 +1,26 @@
 return {
   {
-    'williamboman/mason.nvim',
-    config = true
-  },
-  {
     'neovim/nvim-lspconfig',
     dependencies = {
+      {
+        'williamboman/mason.nvim',
+        config = function()
+          local status, mason = pcall(require, "mason")
+          if not status then
+            return
+          end
+
+          mason.setup({
+            ui = {
+              icons = {
+                package_installed = "✓",
+                package_pending = "➜",
+                package_uninstalled = "✗"
+              }
+            }
+          })
+        end
+      },
       {
         'williamboman/mason-lspconfig.nvim',
         config = function()
@@ -16,7 +31,7 @@ return {
 
           mason_lspconfig.setup({
             ensure_installed = {
-              "sumneko_lua",
+              "lua_ls",
               "rust_analyzer",
               "clangd",
               "cssls",
@@ -44,7 +59,23 @@ return {
          "glepnir/lspsaga.nvim",
           event = "BufRead",
           config = function()
-            require("lspsaga").setup({})
+            require("lspsaga").setup({
+              finder = {
+                --percentage
+                max_height = 0.5,
+                force_max_height = false,
+                -- keys = {
+                --   jump_to = 'p',
+                --   edit = { 'o', '<CR>' },
+                --   vsplit = 's',
+                --   split = 'i',
+                --   tabe = 't',
+                --   tabnew = 'r',
+                --   quit = { 'q', '<ESC>' },
+                --   close_in_preview = '<ESC>'
+                -- },
+              },
+          })
           end,
           dependencies = {
             {"nvim-tree/nvim-web-devicons"}
@@ -128,7 +159,7 @@ return {
           on_attach = on_attach,
         },
       })
-      
+
       -- configure cpp clangd
       lspconfig["clangd"].setup({
         capabilities = capabilities,
@@ -151,6 +182,12 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       })
+
+      lspconfig["lua_ls"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
       -- configure emmet language server
       lspconfig["emmet_ls"].setup({
         capabilities = capabilities,
@@ -174,28 +211,6 @@ return {
           },
         },
       })
-
-      -- configure lua server (with special settings)
-      lspconfig["sumneko_lua"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = { -- custom settings for lua
-          Lua = {
-            -- make the language server recognize "vim" global
-            diagnostics = {
-              globals = { "vim" },
-            },
-            workspace = {
-              -- make language server aware of runtime files
-              library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.stdpath("config") .. "/lua"] = true,
-              },
-            },
-          },
-        },
-      })
-
 
     end
   },

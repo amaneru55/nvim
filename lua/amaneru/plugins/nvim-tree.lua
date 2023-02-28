@@ -1,10 +1,16 @@
 return {
   'nvim-tree/nvim-tree.lua',
+  lazy = false,
   denpendencies = {
     'nvim-tree/nvim-web-devicons', -- optional, for file icons
   },
   version = 'nightly', -- optional, updated every week. (see issue #1193)
   config = function()
+    local status, nt = pcall(require, "nvim-tree")
+    if not status then
+      return
+    end
+
     -- recommended settings from nvim-tree documentation
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
@@ -12,7 +18,7 @@ return {
     -- change color for arrows in tree to light blue
     vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
 
-    require('nvim-tree').setup({
+    nt.setup({
       view = {
         mappings = {
           list = {
