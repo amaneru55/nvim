@@ -12,3 +12,6 @@ keymap.set("n", "<leader>cb", "<cmd>Neotree reveal<cr>")
 keymap.set("", "<s-k>", "<Nop>")
 
 keymap.set("n", "<leader>sx", require("telescope.builtin").resume, { noremap = true, silent = true, desc = "Resume" })
+
+-- LSP will broken in new file, so we need to restart it
+keymap.set("n", "<leader>rs", "<cmd>LspRestart<cr>", { noremap = true, silent = true, desc = "Restart LSP" })
