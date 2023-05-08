@@ -25,8 +25,8 @@ return {
       window = {
         mappings = {
           ["o"] = "open_with_window_picker",
-          ["v"] = "open_vsplit",
-          ["s"] = "open_split",
+          ["v"] = "vsplit_with_window_picker",
+          ["s"] = "split_with_window_picker",
         },
       },
     })
